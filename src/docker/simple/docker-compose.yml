@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  influxdb:
+    image: influxdb:2.7-alpine
+    container_name: influxdb
+    env_file:
+      - influxv2.env
+      - ./.env
+    volumes:
+      # Mount for influxdb data directory and configuration
+      - "${HOST_DB_VOLUME}:/var/lib/influxdb2:rw"
+      - "${HOST_HOME}/data/influxdb/:/home/influxdb"
+    ports:
+      - "8086:8086"
